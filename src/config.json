@@ -1,0 +1,6 @@
+{  
+  "toasterOptions": {
+    "autoClose": 1500,
+    "hideProgressBar": true
+  }
+}
