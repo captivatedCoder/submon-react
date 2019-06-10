@@ -44,17 +44,32 @@ class Form extends Component {
 
     const data = { ...this.state.data };
     data[input.name] = input.value;
+    
     this.setState({ data, errors });
   };
 
   renderButton(label) {
     return (
-      <button
+      <button 
         disabled={this.validate()}
-        className="btn btn-outline-primary btn-block"
-      >
+        className="btn btn-primary"
+        >
         {label}
       </button>
+    );
+  }
+
+  renderDatePicker(name, label, type) {
+    const { data, errors } = this.state;
+    return (
+      <Input
+        type={type}
+        name={name}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+        error={errors[name]}
+      />
     );
   }
 
@@ -73,7 +88,7 @@ class Form extends Component {
     );
   }
 
-  renderInput(name, label, type = "text") {
+  renderInput(name, label, type) {
     const { data, errors } = this.state;
 
     return (
@@ -83,6 +98,22 @@ class Form extends Component {
         value={data[name]}
         label={label}
         onChange={this.handleChange}
+        error={errors[name]}
+      />
+    );
+  }
+
+  renderTextArea(name, label) {
+    const { data, errors } = this.state;
+
+    return (
+      <textarea
+        className="form-control"
+        name={name}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+        rows="5"
         error={errors[name]}
       />
     );
