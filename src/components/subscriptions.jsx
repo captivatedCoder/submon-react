@@ -113,8 +113,6 @@ class Subscriptions extends Component {
     const { length: count } = this.state.subscriptions;
     const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
 
-    if (count === 0) return <p>No Subscriptions in database.</p>;
-
     const { totalCount, data: subscriptions } = this.getPagedData();
 
     return (
