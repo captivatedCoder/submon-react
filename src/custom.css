@@ -1,3 +1,43 @@
 .btn {
   border-radius: 5px;
 }
+
+#AddReminder{
+  color: white;
+}
+
+.reminderDays {
+  width: 50px;  
+}
+
+select.form-control{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-border-radius: 0px;
+  background-image: url("https://image.flaticon.com/icons/svg/60/60781.svg");
+  background-position: 99% 50%;
+  background-repeat: no-repeat;
+  background-size: 16px;
+}
+
+.navbar-nav {
+  flex-direction: row;    
+}
+.navbar-nav > li{
+  padding-right: 50px;
+}
+
+@media screen and (min-width: 20em) and (max-width: 40em){
+  #listgroup {
+    display: none;
+  }
+
+  .table thead tr th:nth-child(4),
+  .table tbody tr td:nth-child(4){
+    display: none;
+  }
+  
+  #reminderButton {
+    border-radius: 0px;
+  }
+}

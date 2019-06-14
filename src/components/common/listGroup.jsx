@@ -7,8 +7,9 @@ const ListGroup = ({
   selectedItem,
   onItemSelect
 }) => {
+  
   return (
-    <ul className="list-group">
+    <ul id="listgroup" className="list-group">
       {items.map(item => (
         <li
           onClick={() => onItemSelect(item)}

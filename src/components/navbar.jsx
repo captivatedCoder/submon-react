@@ -3,16 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const NavBar = ({ user }) => {
   return (
-    <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <nav className="navbar navbar-expand-sm navbar-dark bg-dark">      
         <div className="navbar-nav">
           {!user && (
             <React.Fragment>
@@ -23,16 +14,15 @@ const NavBar = ({ user }) => {
           )}
           {user && (
             <React.Fragment>
-              <NavLink className="nav-item nav-link" to="/subscriptions">
+              <NavLink className="nav-item nav-link px-2" to="/subscriptions">
                 {user.name}
               </NavLink>
-              <NavLink className="nav-item nav-link" to="/logout">
+              <NavLink className="nav-item nav-link px-2" to="/logout">
                 Logout
               </NavLink>
             </React.Fragment>
           )}
-        </div>
-      </div>
+        </div>      
     </nav>
   );
 };

@@ -13,7 +13,8 @@ class SubscriptionForm extends Form {
       name: "",
       subId: "",
       expirationDate: "",
-      notes: ""
+      notes: "",
+      reminders: []
     },
     subTypes: [],
     errors: {}
@@ -32,12 +33,13 @@ class SubscriptionForm extends Form {
       .label("Due Date"),
     notes: Joi.string()
       .required()
-      .label("Notes")
+      .label("Notes"),    
+    reminders: Joi.array()
   };
 
   async populateTypes() {
-      const { data: subTypes } = await getSubTypes();      
-      this.setState({ subTypes });    
+    const { data: subTypes } = await getSubTypes();
+    this.setState({ subTypes });
   }
 
   async populateSubscription() {
@@ -46,7 +48,7 @@ class SubscriptionForm extends Form {
       if (subId === "new") return;
 
       const { data: subscription } = await getSubscription(subId);
-
+      
       this.setState({ data: this.mapToViewModel(subscription) });
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
@@ -65,17 +67,35 @@ class SubscriptionForm extends Form {
       name: subscription.name,
       subId: subscription.subType._id,
       expirationDate: subscription.expirationDate,
-      notes: subscription.notes
+      notes: subscription.notes,
+      reminders: subscription.reminders
     };
   }
 
   doSubmit = async () => {
     await saveSubscription(this.state.data);
-
     this.props.history.push("/subscriptions");
   };
 
-  render() {
+  doDelete = (reminder) => {
+    let newReminders = [...this.state.data.reminders];
+    const index = newReminders.indexOf(reminder);
+    newReminders.splice(index, 1);
+
+    this.setState({data:{ ...this.state.data,reminders: newReminders }});
+  }
+
+  doReminderChange = (e, reminder) => {
+    console.log(`Here: ${e.toString()} ${reminder}`);
+  };
+
+  doAdd = () => {
+    let newReminders = [...this.state.data.reminders];
+    newReminders.push(1);
+
+    this.setState({ data: { ...this.state.data, reminders: newReminders } });
+  }
+  render() {  
     return (
       <div>
         <h3>Subscription Form</h3>
@@ -84,6 +104,7 @@ class SubscriptionForm extends Form {
           {this.renderSelect("subId", "Type", this.state.subTypes)}
           {this.renderDatePicker("expirationDate", "Due Date", "date")}
           {this.renderTextArea("notes", "Notes", "text")}
+          {this.renderReminder("reminders")}
           {this.renderButton("Save")}
         </form>
       </div>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
+import Reminder from "../reminder";
 
 class Form extends Component {
   state = {
@@ -10,12 +11,14 @@ class Form extends Component {
   };
 
   validate = () => {
+    console.log(this.state.data);
     const options = { abortEarly: false };
     const { error } = Joi.validate(this.state.data, this.schema, options);
     if (!error) return null;
 
     const errors = {};
     for (let item of error.details) errors[item.path[0]] = item.message;
+
     return errors;
   };
 
@@ -39,21 +42,31 @@ class Form extends Component {
   handleChange = ({ currentTarget: input }) => {
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
+
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
 
     const data = { ...this.state.data };
     data[input.name] = input.value;
-    
+
     this.setState({ data, errors });
+  };
+
+  handleReminderChange = (e,reminder) => {
+    this.doReminderChange(e, reminder);
+  };
+
+  handleDelete = reminder => {
+    this.doDelete(reminder);
+  };
+
+  handleAdd = () => {
+    this.doAdd();
   };
 
   renderButton(label) {
     return (
-      <button 
-        disabled={this.validate()}
-        className="btn btn-primary"
-        >
+      <button disabled={this.validate()} className="btn btn-primary">
         {label}
       </button>
     );
@@ -115,6 +128,21 @@ class Form extends Component {
         onChange={this.handleChange}
         rows="5"
         error={errors[name]}
+      />
+    );
+  }
+
+  renderReminder(name) {
+    const { data, errors } = this.state;
+
+    return (
+      <Reminder
+        data={data}
+        name={name}
+        error={errors[name]}
+        onChange={this.handleReminderChange}
+        onDelete={this.handleDelete}
+        onAdd={this.handleAdd}
       />
     );
   }

@@ -35,7 +35,7 @@ class SubscriptionsTable extends Component {
 
   render() {
     const { subscriptions } = this.props;
-
+    
     return (
       <Table responsive className="table">
         <TableHeader columns={this.columns} />

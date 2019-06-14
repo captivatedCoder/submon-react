@@ -2,7 +2,7 @@ import React from "react";
 
 const Select = ({ name, label, options, error, ...rest }) => {
   return (
-    <div className="form-group">
+    <div className="input-group">
       <div className="input-group-prepend">
           <span className="input-group-text">{label}</span>
         </div>

@@ -80,44 +80,31 @@ class Subscriptions extends Component {
 
     let filtered = allSubscriptions;
 
-    console.log(`filtered: ${filtered}`);
-    console.log(`Search query:${searchQuery}`);
-
-    if (searchQuery){
-
-      console.log("in if");
-
+    if (searchQuery) {
       filtered = allSubscriptions.filter(s =>
         s.name.toLowerCase().startsWith(searchQuery.toLowerCase())
-      );}
-    else if (selectedSubType && selectedSubType._id){
-
-      console.log("in else if");
-
+      );
+    } else if (selectedSubType && selectedSubType._id) {
       filtered = allSubscriptions.filter(
         s => s.subType._id === selectedSubType._id
-      );}
-
-    console.log(`After search query ${filtered}`);
+      );
+    }
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
-    console.log(`Sorted: ${sorted}`);
-
     const subscriptions = paginate(sorted, currentPage, pageSize);
-        
+
     return { totalCount: filtered.length, data: subscriptions };
   };
 
   render() {
-    const { length: count } = this.state.subscriptions;
     const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
 
     const { totalCount, data: subscriptions } = this.getPagedData();
 
     return (
       <div className="row">
-        <div className="col-2">
+        <div className="col-3">
           <ListGroup
             items={this.state.subTypes}
             selectedItem={this.state.selectedSubType}

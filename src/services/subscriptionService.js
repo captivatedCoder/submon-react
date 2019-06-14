@@ -26,7 +26,6 @@ export function getSubscription(subId) {
 }
 
 export function saveSubscription(subscription) {
-  console.log(subscription);
   if (subscription._id) {
     const body = {
       ...subscription
