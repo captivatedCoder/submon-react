@@ -10,9 +10,8 @@ class Form extends Component {
     errors: {}
   };
 
-  validate = () => {
-    console.log(this.state.data);
-    const options = { abortEarly: false };
+  validate = () => {    
+    const options = { abortEarly: false, allowUnknown: true };
     const { error } = Joi.validate(this.state.data, this.schema, options);
     if (!error) return null;
 
@@ -52,8 +51,8 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
-  handleReminderChange = (e,reminder) => {
-    this.doReminderChange(e, reminder);
+  handleReminderChange = (e) => {
+    this.doReminderChange(e);
   };
 
   handleDelete = reminder => {
@@ -66,7 +65,7 @@ class Form extends Component {
 
   renderButton(label) {
     return (
-      <button disabled={this.validate()} className="btn btn-primary">
+      <button disabled={this.validate()} className="btn btn-primary">      
         {label}
       </button>
     );
@@ -132,15 +131,15 @@ class Form extends Component {
     );
   }
 
-  renderReminder(name) {
+  renderReminder(reminder) {
     const { data, errors } = this.state;
 
     return (
       <Reminder
         data={data}
-        name={name}
-        error={errors[name]}
-        onChange={this.handleReminderChange}
+        name={reminder}
+        error={errors[reminder]}
+        onChange={this.handleChange}
         onDelete={this.handleDelete}
         onAdd={this.handleAdd}
       />

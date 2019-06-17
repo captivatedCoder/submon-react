@@ -1,11 +1,11 @@
 import React from "react";
 
-const Reminder = (props) => {  
+const Reminder = ({onChange, onAdd, onDelete, name, data:{reminders}}) => {  
 return (
     <React.Fragment>
       <div>
         <ul className="list-group">
-          {props.data.reminders.map((reminder, index) => (
+          {reminders.map((reminder, index) => (
             <li className="list-group-item">
               <div className="row">
                 <div className="input-group">
@@ -14,9 +14,9 @@ return (
                   </div>
                   <input                    
                     className="reminderDays"
-                    id={props.data.name}
-                    onChange={(e)=>props.onChange(e,reminder)}
-                    name={props.data.name}
+                    id={name}
+                    name={name}
+                    onChange={(e)=>onChange(e)}                    
                     type="text"
                     key={index}
                     defaultValue={reminder}
@@ -28,7 +28,7 @@ return (
                     <button
                       id="reminderButton"
                       className="btn btn-sm btn-outline-danger"
-                      onClick={()=>props.onDelete(reminder)}
+                      onClick={()=>onDelete(reminder)}
                     >
                       Delete
                     </button>
@@ -40,7 +40,7 @@ return (
         </ul>
         <button 
           id="AddReminder"
-          onClick={()=>props.onAdd()}
+          onClick={()=>onAdd()}
         >
           Add Reminder
         </button>

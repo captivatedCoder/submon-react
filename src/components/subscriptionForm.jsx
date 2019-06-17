@@ -35,6 +35,8 @@ class SubscriptionForm extends Form {
       .required()
       .label("Notes"),    
     reminders: Joi.array()
+      .items(Joi.number())
+      .label("Reminders")
   };
 
   async populateTypes() {
@@ -85,8 +87,8 @@ class SubscriptionForm extends Form {
     this.setState({data:{ ...this.state.data,reminders: newReminders }});
   }
 
-  doReminderChange = (e, reminder) => {
-    console.log(`Here: ${e.toString()} ${reminder}`);
+  doReminderChange = (e) => {
+    console.log(`Here: `, e);
   };
 
   doAdd = () => {
@@ -104,7 +106,7 @@ class SubscriptionForm extends Form {
           {this.renderSelect("subId", "Type", this.state.subTypes)}
           {this.renderDatePicker("expirationDate", "Due Date", "date")}
           {this.renderTextArea("notes", "Notes", "text")}
-          {this.renderReminder("reminders")}
+          {this.renderReminder("reminder")}
           {this.renderButton("Save")}
         </form>
       </div>
