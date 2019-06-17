@@ -33,7 +33,7 @@ class SubscriptionForm extends Form {
       .label("Due Date"),
     notes: Joi.string()
       .required()
-      .label("Notes"),    
+      .label("Notes"),
     reminders: Joi.array()
       .items(Joi.number())
       .label("Reminders")
@@ -50,7 +50,7 @@ class SubscriptionForm extends Form {
       if (subId === "new") return;
 
       const { data: subscription } = await getSubscription(subId);
-      
+
       this.setState({ data: this.mapToViewModel(subscription) });
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
@@ -79,16 +79,22 @@ class SubscriptionForm extends Form {
     this.props.history.push("/subscriptions");
   };
 
-  doDelete = (reminder) => {
+  doDelete = reminder => {
     let newReminders = [...this.state.data.reminders];
     const index = newReminders.indexOf(reminder);
     newReminders.splice(index, 1);
 
-    this.setState({data:{ ...this.state.data,reminders: newReminders }});
-  }
+    this.setState({ data: { ...this.state.data, reminders: newReminders } });
+  };
 
-  doReminderChange = (e) => {
-    console.log(`Here: `, e);
+  doReminderChange = input => {    
+    // if(input.value === "") return;
+    let newReminders = [...this.state.data.reminders]; 
+    const oldValue = Number(input.defaultValue);   
+    const index = newReminders.indexOf(oldValue);
+    newReminders[index] = input.value;
+
+    this.setState({ data: { ...this.state.data, reminders: newReminders } });
   };
 
   doAdd = () => {
@@ -96,8 +102,9 @@ class SubscriptionForm extends Form {
     newReminders.push(1);
 
     this.setState({ data: { ...this.state.data, reminders: newReminders } });
-  }
-  render() {  
+  };
+  
+  render() {
     return (
       <div>
         <h3>Subscription Form</h3>

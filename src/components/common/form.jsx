@@ -51,8 +51,8 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
-  handleReminderChange = (e) => {
-    this.doReminderChange(e);
+  handleReminderChange = ({currentTarget: input}) => {
+    this.doReminderChange(input);
   };
 
   handleDelete = reminder => {
@@ -139,7 +139,7 @@ class Form extends Component {
         data={data}
         name={reminder}
         error={errors[reminder]}
-        onChange={this.handleChange}
+        onChange={this.handleReminderChange}
         onDelete={this.handleDelete}
         onAdd={this.handleAdd}
       />

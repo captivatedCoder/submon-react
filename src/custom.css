@@ -3,7 +3,16 @@
 }
 
 #AddReminder{
-  color: white;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 1em 0 2em 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+#AddReminder:hover{
+  text-decoration: underline;
 }
 
 .reminderDays {
