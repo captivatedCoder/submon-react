@@ -1,7 +1,7 @@
 import React from "react";
 
-const Reminder = ({onChange, onAdd, onDelete, name, data:{reminders}}) => {  
-return (
+const Reminder = ({ onChange, onAdd, onDelete, name, data: { reminders } }) => {
+  return (
     <React.Fragment>
       <div>
         <ul className="list-group">
@@ -12,11 +12,11 @@ return (
                   <div className="input-group-prepend">
                     <span className="input-group-text">Reminder</span>
                   </div>
-                  <input                    
+                  <input
                     className="reminderDays"
                     id={name}
                     name={name}
-                    onChange={(e)=>onChange(e)}                    
+                    onChange={(e)=>onChange(e)}
                     type="text"
                     key={index}
                     defaultValue={reminder}
@@ -26,6 +26,7 @@ return (
                   </div>
                   <div className="col">
                     <button
+                      type="button"
                       id="reminderButton"
                       className="btn btn-sm btn-outline-danger"
                       onClick={()=>onDelete(reminder)}
@@ -38,10 +39,7 @@ return (
             </li>
           ))}
         </ul>
-        <button 
-          id="AddReminder"
-          onClick={()=>onAdd()}
-        >
+        <button type="button" id="AddReminder" onClick={() => onAdd()}>
           Add Reminder
         </button>
       </div>
