@@ -16,7 +16,7 @@ const Reminder = ({ onChange, onAdd, onDelete, name, data: { reminders } }) => {
                     className="reminderDays"
                     id={name}
                     name={name}
-                    onChange={(e)=>onChange(e)}
+                    onChange={onChange}
                     type="text"
                     key={index}
                     defaultValue={reminder}
