@@ -21,7 +21,6 @@ class LoginForm extends Form {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      console.log(data.username, data.password);
       await auth.login(data.username, data.password);
 
       window.location = "/subscriptions";
