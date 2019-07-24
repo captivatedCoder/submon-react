@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/common/protectedRoute";
 import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import NewUser from "./components/newUserForm";
 
 class App extends Component {
   state = {};
@@ -33,6 +34,7 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <ProtectedRoute path="/subscriptions" component={Subscriptions} />
+            <ProtectedRoute path="/newuser" component={NewUser} />
             <Route path="/not-found" component={NotFound} />
             <Redirect from="/" exact to="/subscriptions" />
             <Redirect to="not-found" />

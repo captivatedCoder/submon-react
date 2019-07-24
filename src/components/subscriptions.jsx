@@ -17,7 +17,7 @@ class Subscriptions extends Component {
     subscriptions: [],
     subTypes: [],
     currentPage: 1,
-    pageSize: 4,
+    pageSize: 10,
     searchQuery: "",
     selectedSubType: null,
     sortColumn: { path: "title", order: "asc" }
